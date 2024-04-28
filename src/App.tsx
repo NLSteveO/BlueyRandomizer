@@ -1,35 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import Button from './components/Button';
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+const totalSeasons = 3;
+const episodesPerSeason = [52, 51, 50]
+
+const App: React.FC = () => {
+  const [episode, setEpisode] = useState({ season: 0, episode: 0 });
+
+  const handleRandomize = () => {
+    const randomSeason = Math.floor(Math.random() * totalSeasons) + 1;
+    const randomEpisode = Math.floor(Math.random() * episodesPerSeason[randomSeason - 1]) + 1;
+
+    setEpisode({ season: randomSeason, episode: randomEpisode });
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className='main-container'>
+      <h1>Bluey Episode Randomizer</h1>
+      <h2>Season {episode.season} Episode {episode.episode}</h2>
+      <Button onClick={handleRandomize} label="Randomize Episode" />
+    </div>
+  );
+};
 
-export default App
+export default App;
