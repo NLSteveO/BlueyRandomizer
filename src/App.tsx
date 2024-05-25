@@ -1,18 +1,30 @@
 import React, { useState } from 'react';
 import Button from './components/Button';
 import './App.css';
-
-const totalSeasons = 3;
-const episodesPerSeason = [52, 51, 50]
+import episodesData from './data/episodes.json';
+import { Seasons } from './types';
 
 const App: React.FC = () => {
+  const data: Seasons = episodesData;
   const [episode, setEpisode] = useState({ season: 0, episode: 0 });
 
-  const handleRandomize = () => {
-    const randomSeason = Math.floor(Math.random() * totalSeasons) + 1;
-    const randomEpisode = Math.floor(Math.random() * episodesPerSeason[randomSeason - 1]) + 1;
+  const getRandomSeason = () => {
+    const totalSeasons = Object.keys(data).length;
+    const seasonNumber = Math.floor(Math.random() * totalSeasons) + 1;
+    return seasonNumber;
+  };
 
-    setEpisode({ season: randomSeason, episode: randomEpisode });
+  const getRandomEpisode = (seasonIndex: number) => {
+    const season = Math.floor(Math.random() * seasonIndex) + 1;
+    const totalEpisodes = data[season].length;
+    return Math.floor(Math.random() * totalEpisodes) + 1;
+  }
+
+  const handleRandomize = () => {
+    const randomSeason = getRandomSeason();
+    const randomEpisode = getRandomEpisode(randomSeason);
+
+    setEpisode({ season: Number(randomSeason), episode: randomEpisode });
   };
 
   return (
