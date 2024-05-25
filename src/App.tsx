@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import Button from './components/Button';
 import './App.css';
 import episodesData from './data/episodes.json';
-import { Seasons } from './types';
+import { Episode, Seasons } from './types';
 
 const App: React.FC = () => {
   const data: Seasons = episodesData;
-  const [episode, setEpisode] = useState({ season: 0, episode: 0 });
+  const [episode, setEpisode] = useState<Episode & { season: number } | null>(null);
 
   const getRandomSeason = () => {
     const totalSeasons = Object.keys(data).length;
@@ -23,14 +23,16 @@ const App: React.FC = () => {
   const handleRandomize = () => {
     const randomSeason = getRandomSeason();
     const randomEpisode = getRandomEpisode(randomSeason);
+    const episode = data[randomSeason][randomEpisode - 1];
 
-    setEpisode({ season: Number(randomSeason), episode: randomEpisode });
+    setEpisode({ season: Number(randomSeason), ...episode });
   };
 
   return (
     <div className='main-container'>
       <h1>Bluey Episode Randomizer</h1>
-      <h2>Season {episode.season} Episode {episode.episode}</h2>
+      <h2>Season {episode?.season || 0} Episode {episode?.episode || 0}</h2>
+      {(episode && <h2>{episode?.title}</h2>)}
       <Button onClick={handleRandomize} label="Randomize Episode" />
     </div>
   );
