@@ -13,11 +13,11 @@ const Button: React.FC<ButtonProps> = ({ onClick, label }) => {
       style={{
         backgroundColor: '#2b2c41',
         color: '#edcc6f',
-        padding: '10px 20px',
+        padding: '20px 40px',
         border: 'none',
         borderRadius: '5px',
         cursor: 'pointer',
-        fontSize: '16px',
+        fontSize: '24px',
         marginTop: '20px'
       }}
     >
