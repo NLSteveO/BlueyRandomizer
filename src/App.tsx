@@ -32,7 +32,9 @@ const App: React.FC = () => {
     <div className='main-container'>
       <h1>Bluey Episode Randomizer</h1>
       <h2>Season {episode?.season || 0} Episode {episode?.episode || 0}</h2>
-      {(episode && <h2>{episode?.title}</h2>)}
+      {(episode && <img src={episode?.image} alt={episode?.title} />)}
+      {(episode && <h3>{episode?.title}</h3>)}
+      {(episode && <p>{episode?.description}</p>)}
       <Button onClick={handleRandomize} label="Randomize Episode" />
     </div>
   );
