@@ -28,13 +28,36 @@ const App: React.FC = () => {
     setEpisode({ season: Number(randomSeason), ...episode });
   };
 
+  const getEpisodeTitle = () => {
+    if (!episode?.title) return null;
+    return (<h3>{episode?.title}</h3>);
+  }
+
+  const getEpisodeDescription = () => {
+    if (!episode?.description) return null;
+    return (<p>{episode?.description}</p>);
+  }
+
+  const getEpisodeImage = () => {
+    if (!episode?.image) return null;
+    if (!episode?.url) {
+      return (<img src={episode?.image} alt={episode?.title} />);
+    }
+    const link = `https://www.disneyplus.com${episode?.url}`;
+    return (
+      <a href={link}>
+        <img src={episode?.image} alt={episode?.title} />
+      </a>
+    );
+  }
+
   return (
     <div className='main-container'>
       <h1>Bluey Episode Randomizer</h1>
       <h2>Season {episode?.season || 0} Episode {episode?.episode || 0}</h2>
-      {(episode && <img src={episode?.image} alt={episode?.title} />)}
-      {(episode && <h3>{episode?.title}</h3>)}
-      {(episode && <p>{episode?.description}</p>)}
+      {getEpisodeImage()}
+      {getEpisodeTitle()}
+      {getEpisodeDescription()}
       <Button onClick={handleRandomize} label="Randomize Episode" />
     </div>
   );
