@@ -16,3 +16,7 @@ h1 {
 img {
   width: 100%;
 }
+
+#warning {
+  color: #ff0001;
+}

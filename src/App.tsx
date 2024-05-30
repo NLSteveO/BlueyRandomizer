@@ -51,10 +51,16 @@ const App: React.FC = () => {
     );
   }
 
+  const getEpisodeWarning = () => {
+    if (!episode?.warning) return null;
+    return (<h3 id='warning'>WARNING: {episode?.warning}</h3>);
+  }
+
   return (
     <div className='main-container'>
       <h1>Bluey Episode Randomizer</h1>
       <h2>Season {episode?.season || 0} Episode {episode?.episode || 0}</h2>
+      {getEpisodeWarning()}
       {getEpisodeImage()}
       {getEpisodeTitle()}
       {getEpisodeDescription()}

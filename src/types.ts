@@ -2,6 +2,7 @@ export interface Episode {
   episode: string;
   title: string;
   description: string;
+  warning?: string;
   image: string;
   url: string;
 }
